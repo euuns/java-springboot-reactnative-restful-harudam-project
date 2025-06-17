@@ -14,9 +14,8 @@ public class AgeRedisRepository {
 		this.redisTemplate = redisTemplate;
 	}
 
-	// 6개월 기준으로 갱신
 	public void save(Long userId, int age) {
-		redisTemplate.opsForValue().set("user:age:" + userId, age, Duration.ofDays(180));
+		redisTemplate.opsForValue().set("user:age:" + userId, age, Duration.ofDays(365));
 	}
 
 	public Integer find(Long userId) {
