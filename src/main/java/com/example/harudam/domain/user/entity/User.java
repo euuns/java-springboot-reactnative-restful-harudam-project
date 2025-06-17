@@ -19,6 +19,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -45,6 +46,19 @@ public class User extends TimeStamp {
 	private UserRole role;
 	private LocalDateTime deletedAt;
 
+	@Builder
+	private User(String email, String password, String nickname, LocalDate birthDate, int height) {
+		this.email = email;
+		this.password = password;
+		this.nickname = nickname;
+		this.birthDate = birthDate;
+		this.height = height;
+		this.role = UserRole.ROLE_USER;
+	}
+	public static User of(String email, String password, String nickname, LocalDate birthDate, int height) {
+		return User.builder().email(email).password(password).nickname(nickname).birthDate(birthDate).height(height).build();
+	}
+
 	public void updatePassword(String password) {
 		this.password = password;
 	}
@@ -56,5 +70,4 @@ public class User extends TimeStamp {
 	public void updateHeight(int height) {
 		this.height = height;
 	}
-
 }

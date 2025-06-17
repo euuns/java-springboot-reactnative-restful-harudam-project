@@ -1,5 +1,7 @@
 package com.example.harudam.auth.dto;
 
+import java.time.LocalDate;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -20,8 +22,8 @@ public class SignupRequest {
 	@NotBlank(message = "이름 입력은 필수 입니다.")
 	private String name;
 
-	@NotNull(message = "나이 입력은 필수 입니다.")
-	private int age;
+	@NotNull(message = "생일 입력은 필수 입니다.")
+	private LocalDate birthDate;
 
 	private int height;
 }
