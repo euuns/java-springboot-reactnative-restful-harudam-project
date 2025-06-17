@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.example.harudam.domain.user.dto.projection.UserBirthProjection;
 import com.example.harudam.domain.user.entity.User;
 import com.example.harudam.domain.user.repository.AgeRedisRepository;
 import com.example.harudam.domain.user.repository.UserRepository;
@@ -27,9 +28,9 @@ public class AgeScheduler {
 	public void refreshAgeCache() {
 
 		int cnt = 0;
-		List<User> users = userRepository.findAll();
+		List<UserBirthProjection> users = userRepository.findBirthInfoByMonthAndDay(LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth());
 
-		for (User user : users) {
+		for (UserBirthProjection user : users) {
 			int age = Period.between(user.getBirthDate(), LocalDate.now()).getYears();
 			ageRedisRepository.save(user.getId(), age);
 			cnt++;
