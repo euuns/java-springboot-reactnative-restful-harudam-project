@@ -23,7 +23,7 @@ public class AuthController {
 	@PostMapping("/signup")
 	public ResponseDto<Void> signup(@Valid @RequestBody SignupRequest request) {
 		return ResponseDto.success(
-			authService.signup(request.getEmail(), request.getPassword(), request.getName(), request.getAge(),
+			authService.signup(request.getEmail(), request.getPassword(), request.getName(), request.getBirthDate(),
 				request.getHeight()));
 	}
 

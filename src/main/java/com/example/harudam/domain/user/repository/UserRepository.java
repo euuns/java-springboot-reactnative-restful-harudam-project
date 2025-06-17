@@ -15,4 +15,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 	@Query(value = "SELECT id, birth_date FROM user WHERE MONTH(birth_date) = :month AND DAY(birth_date) = :day", nativeQuery = true)
 	List<UserBirthProjection> findBirthInfoByMonthAndDay(@Param("month") int month, @Param("day") int day);
 
+	User findByEmail(String email);
+
+	boolean existsByEmail(String email);
 }
